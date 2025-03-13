@@ -1,12 +1,31 @@
-const mongoose = require('mongoose');
+const sql = require('mssql');
 
-const cartSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    bookId: { type: mongoose.Schema.Types.ObjectId, ref: 'Book', required: true },
-    quantity: { type: Number, required: true },
-    createdAt: { type: Date, default: Date.now }
-});
+const orderTableStructure = `
+CREATE TABLE orders (
+    order_id INT IDENTITY(1,1) PRIMARY KEY,
+    user_id INT NOT NULL,
+    order_date DATETIME NOT NULL,
+    total_amount DECIMAL(10,2) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    payment_method VARCHAR(50) NOT NULL,
+    payment_status VARCHAR(50) NOT NULL,
+    transaction_id VARCHAR(100),
+    shipping_address NVARCHAR(MAX) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+)`;
 
-const Cart = mongoose.model('Cart', cartSchema);
+const orderItemsTableStructure = `
+CREATE TABLE order_items (
+    order_item_id INT IDENTITY(1,1) PRIMARY KEY,
+    order_id INT NOT NULL,
+    book_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id)
+)`;
 
-module.exports = Cart;
+module.exports = {
+  orderTableStructure,
+  orderItemsTableStructure
+};

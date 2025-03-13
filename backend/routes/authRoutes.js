@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const authControllers = require('../controllers/authControllers');  // Đảm bảo đường dẫn đúng
+const authController = require('../controllers/authController');
 
-router.post('/register', authControllers.register);
-router.post('/login', authControllers.login);
+// Đăng ký
+router.post('/register', authController.register);
+
+// Đăng nhập
+router.post('/login', authController.login);
 
 module.exports = router;

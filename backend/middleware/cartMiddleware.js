@@ -1,25 +1,35 @@
-const { sql } = require('../config/db');
+const sql = require('mssql');
+const config = require('../config/db');
 
-exports.checkCartItems = async (req, res, next) => {
-  const { userId } = req.userId; // Lấy userId từ token
-  const { cartItems } = req.body;
-
+exports.validateOrder = async (req, res, next) => {
   try {
-    if (!cartItems || cartItems.length === 0) {
-      return res.status(400).json({ message: 'Giỏ hàng không có sản phẩm' });
+    const { items } = req.body;
+    
+    if (!items || items.length === 0) {
+      return res.status(400).json({ message: 'Đơn hàng không có sản phẩm' });
     }
 
-    // Kiểm tra tất cả các sản phẩm trong giỏ hàng
-    for (let item of cartItems) {
-      const result = await sql.query`SELECT * FROM Books WHERE book_id = ${item.bookId}`;
+    const pool = await sql.connect(config);
+    
+    // Kiểm tra tồn tại của sách
+    for (const item of items) {
+      const result = await pool.request()
+        .input('bookId', sql.Int, item.book_id)
+        .query('SELECT * FROM books WHERE book_id = @bookId');
+        
       if (result.recordset.length === 0) {
-        return res.status(404).json({ message: `Sản phẩm với ID ${item.bookId} không tồn tại` });
+        return res.status(404).json({ 
+          message: `Sách với ID ${item.book_id} không tồn tại` 
+        });
       }
     }
-
-    next(); // Nếu tất cả các sản phẩm đều hợp lệ
+    
+    next();
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Lỗi khi kiểm tra giỏ hàng', error: error.message });
+    console.error('Validate order error:', error);
+    res.status(500).json({ 
+      message: 'Lỗi khi kiểm tra đơn hàng', 
+      error: error.message 
+    });
   }
 };
