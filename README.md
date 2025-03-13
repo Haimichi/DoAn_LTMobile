@@ -19,6 +19,7 @@ Một vài tài nguyên để giúp bạn bắt đầu nếu đây là dự án 
 
 Mô tả ngắn gọn về cấu trúc của dự án để người đọc dễ dàng nắm bắt:
 
+- `backend/`: chứ mã nguồn server của ứng dụng.
 - `lib/`: Chứa mã nguồn chính của ứng dụng.
 - `test/`: Chứa các bài kiểm tra cho ứng dụng.
 - `assets/`: Chứa các tài nguyên như hình ảnh, font chữ.
