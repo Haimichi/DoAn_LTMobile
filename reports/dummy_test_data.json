@@ -1,0 +1,37 @@
+[
+  {
+    "testName": "Đăng ký tài khoản",
+    "description": "Đăng ký tài khoản thành công với email: lva@gmail.com",
+    "passed": false,
+    "error": "Không tìm thấy thông báo đăng ký thành công",
+    "timestamp": "2025-04-07T18:36:10.123Z"
+  },
+  {
+    "testName": "Đăng ký tài khoản (bỏ trống email)",
+    "description": "Kiểm tra thông báo lỗi khi bỏ trống email",
+    "passed": true,
+    "error": null,
+    "timestamp": "2025-04-07T18:36:12.456Z"
+  },
+  {
+    "testName": "Đăng ký tài khoản (bỏ trống full name)",
+    "description": "Kiểm tra thông báo lỗi khi bỏ trống full name",
+    "passed": true,
+    "error": null,
+    "timestamp": "2025-04-07T18:36:15.789Z"
+  },
+  {
+    "testName": "Đăng ký với mật khẩu yếu",
+    "description": "Kiểm tra thông báo lỗi khi mật khẩu không đủ mạnh",
+    "passed": true,
+    "error": null,
+    "timestamp": "2025-04-07T18:36:18.012Z"
+  },
+  {
+    "testName": "Đăng ký với email không hợp lệ",
+    "description": "Kiểm tra thông báo lỗi khi email không đúng định dạng",
+    "passed": false,
+    "error": "Kiểm tra thất bại: Không hiển thị thông báo lỗi khi nhập email không đúng định dạng",
+    "timestamp": "2025-04-07T18:36:20.345Z"
+  }
+] 

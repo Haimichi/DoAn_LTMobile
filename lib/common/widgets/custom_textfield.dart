@@ -17,6 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType,
     this.onTap,
     this.obscureText = false,
+    this.errorTextKey,
   });
 
   final Icon? prefixIcon;
@@ -32,6 +33,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final VoidCallback? onTap;
   final bool obscureText;
+  final String? errorTextKey;
 
   @override
   Widget build(BuildContext context) {

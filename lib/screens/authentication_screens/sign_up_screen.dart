@@ -157,6 +157,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       prefixIcon: const Icon(
                         Icons.mail_rounded,
                       ),
+                      key: const ValueKey('email_field'),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter your email';
@@ -165,6 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         }
                         return null;
                       },
+                      errorTextKey: 'email_error',
                     ),
                     const SizedBox(height: 10),
                     if (signUpFunction == 'That email is already registered')
@@ -186,12 +188,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       prefixIcon: const Icon(
                         Icons.person_rounded,
                       ),
+                      key: const ValueKey('fullname_field'),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter your full name';
                         }
                         return null;
                       },
+                      errorTextKey: 'fullname_error',
                     ),
                     const SizedBox(height: 10),
                     CustomTextField(
@@ -200,6 +204,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       prefixIcon: const Icon(
                         Icons.phone_rounded,
                       ),
+                      key: const ValueKey('phone_field'),
                       keyboardType: TextInputType.phone,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -215,6 +220,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       prefixIcon: const Icon(
                         Icons.calendar_today_rounded,
                       ),
+                      key: const ValueKey('birthdate_field'),
                       readOnly: true,
                       onTap: () => _selectDate(context),
                       validator: (value) {
@@ -231,6 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       prefixIcon: const Icon(
                         Icons.lock_rounded,
                       ),
+                      key: const ValueKey('password_field'),
                       obscureText: true,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -247,6 +254,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ? const CustomCircularProgressBar()
                         : CustomButton(
                             label: 'Sign up',
+                            key: const ValueKey('signup_button'),
                             onPress: () async {
                               if (_formKey.currentState!.validate()) {
                                 bool success = await signUpFunc();
@@ -256,6 +264,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       content: Text(
                                           'Đăng ký thành công! Vui lòng đăng nhập'),
                                       backgroundColor: Colors.green,
+                                      key: ValueKey('success_message'),
                                     ),
                                   );
 
